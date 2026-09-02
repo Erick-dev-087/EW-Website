@@ -270,6 +270,28 @@ export const services: Service[] = [
       "Handoff & design QA",
     ],
   },
+  {
+    id: "seo",
+    number: "06",
+    title: "Search Engine Optimization",
+    description:
+      "Be found by the right people at the right time. We optimize your digital presence to rank higher, drive organic traffic, and convert visitors into customers.",
+    features: [
+      "Technical SEO & site speed",
+      "Keyword strategy & content planning",
+      "On-page & off-page optimization",
+      "Local SEO & Google Business",
+      "Analytics & performance tracking",
+    ],
+    forWho: "Businesses looking to increase their online visibility and reduce reliance on paid advertising.",
+    workflow: [
+      "Comprehensive site audit",
+      "Keyword & competitor research",
+      "Technical optimization",
+      "Content strategy & creation",
+      "Monthly reporting & refinement",
+    ],
+  },
 ];
 
 // ── Process Steps ─────────────────────────────

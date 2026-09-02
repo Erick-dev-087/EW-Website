@@ -8,10 +8,11 @@ export const WHATSAPP_MESSAGE = "Hello E&W! I'd like to discuss a project.";
 export const WHATSAPP_URL_WITH_MESSAGE = `${WHATSAPP_URL}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
 
 export const NAV_LINKS = [
-  { label: "Work", href: "#selected-work" },
-  { label: "Services", href: "#services" },
-  { label: "About", href: "#about" },
-  { label: "Contact", href: "#cta" },
+  { label: "Home", href: "/" },
+  { label: "Work", href: "/#selected-work" },
+  { label: "Services", href: "/#services" },
+  { label: "About", href: "/#about" },
+  { label: "Contact", href: "/#cta" },
 ] as const;
 
 export const CONTACT_INFO = {

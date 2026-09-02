@@ -2,6 +2,7 @@
 
 import { useCallback } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "motion/react";
 import { NAV_LINKS } from "@/lib/constants";
 
@@ -12,20 +13,33 @@ interface MobileMenuProps {
 }
 
 export function MobileMenu({ isOpen, onClose, activeSection }: MobileMenuProps) {
+  const pathname = usePathname();
+
   const handleNavClick = useCallback(
     (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-      e.preventDefault();
-      onClose();
-      // Small delay so the menu closes before scrolling
-      setTimeout(() => {
-        const id = href.replace("#", "");
-        const el = document.getElementById(id);
-        if (el) {
-          el.scrollIntoView({ behavior: "smooth" });
+      if (pathname === "/") {
+        if (href.includes("#")) {
+          e.preventDefault();
+          onClose();
+          setTimeout(() => {
+            const id = href.split("#")[1];
+            const el = document.getElementById(id);
+            if (el) {
+              el.scrollIntoView({ behavior: "smooth" });
+            }
+          }, 350);
+        } else if (href === "/") {
+          e.preventDefault();
+          onClose();
+          setTimeout(() => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }, 350);
         }
-      }, 350);
+      } else {
+        onClose();
+      }
     },
-    [onClose]
+    [onClose, pathname]
   );
 
   return (
@@ -56,7 +70,13 @@ export function MobileMenu({ isOpen, onClose, activeSection }: MobileMenuProps) 
             className="relative z-10 flex flex-col items-center justify-center h-full gap-8 px-6"
           >
             {NAV_LINKS.map((link, index) => {
-              const isActive = activeSection === link.href;
+              const isActive =
+                pathname === "/"
+                  ? activeSection === link.href ||
+                    (link.href === "/" &&
+                      (!activeSection || activeSection === "/"))
+                  : pathname === link.href;
+
               return (
                 <motion.div
                   key={link.href}
@@ -68,7 +88,7 @@ export function MobileMenu({ isOpen, onClose, activeSection }: MobileMenuProps) 
                     ease: [0.16, 1, 0.3, 1],
                   }}
                 >
-                  <a
+                  <Link
                     href={link.href}
                     onClick={(e) => handleNavClick(e, link.href)}
                     className={`text-3xl font-heading font-semibold tracking-tight transition-colors duration-250 ${
@@ -78,7 +98,7 @@ export function MobileMenu({ isOpen, onClose, activeSection }: MobileMenuProps) 
                     }`}
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 </motion.div>
               );
             })}

@@ -2,19 +2,19 @@ import { ScrollReveal } from "@/components/ui/ScrollReveal";
 
 export function About() {
   return (
-    <section id="about" className="relative py-24 md:py-32">
+    <section id="about" className="relative py-32 md:py-48">
       <div className="max-w-[1400px] mx-auto px-6 md:px-10">
         <div className="max-w-3xl">
           {/* Label */}
           <ScrollReveal>
-            <span className="inline-block text-xs font-semibold tracking-[0.2em] uppercase text-accent mb-6">
+            <span className="inline-block text-xs font-semibold tracking-[0.2em] uppercase text-accent mb-8">
               About E&W
             </span>
           </ScrollReveal>
 
           {/* Strong Statement */}
           <ScrollReveal delay={0.1}>
-            <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-text-primary leading-[1.1] mb-8">
+            <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-text-primary leading-[1.1] mb-12">
               Good software isn&apos;t just
               <br />
               about code.
@@ -23,7 +23,7 @@ export function About() {
 
           {/* Philosophy */}
           <ScrollReveal delay={0.2}>
-            <p className="text-text-muted text-base md:text-lg leading-relaxed mb-6">
+            <p className="text-text-muted text-base md:text-lg leading-relaxed mb-10">
               It&apos;s about understanding the problem, designing the right
               solution, and building something people actually want to use. We
               believe great software starts with listening, understanding your
@@ -32,7 +32,7 @@ export function About() {
           </ScrollReveal>
 
           <ScrollReveal delay={0.3}>
-            <p className="text-text-muted text-base md:text-lg leading-relaxed mb-10">
+            <p className="text-text-muted text-base md:text-lg leading-relaxed mb-16">
               E&W exists because we saw too many businesses stuck with tools that
               don&apos;t work, software that doesn&apos;t scale, and technology
               partners who disappear after deployment. We do things differently.
@@ -41,7 +41,7 @@ export function About() {
 
           {/* Values */}
           <ScrollReveal delay={0.35}>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
               {[
                 {
                   title: "Intentional",

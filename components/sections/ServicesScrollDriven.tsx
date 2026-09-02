@@ -6,218 +6,132 @@ import { services } from "@/lib/data";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { Button } from "@/components/ui/Button";
 
-// ── Individual Service Scene ────────────────────────────
+// ── Single Service Row ──────────────────────────────────
 
-function ServiceScene({
+function ServiceRow({
   service,
   index,
-  scrollYProgress,
-  total,
 }: {
   service: (typeof services)[number];
   index: number;
-  scrollYProgress: ReturnType<typeof useScroll>["scrollYProgress"];
-  total: number;
 }) {
-  const segmentSize = 1 / total;
-  const start = index * segmentSize;
-  const center = start + segmentSize / 2;
-  const end = start + segmentSize;
+  const rowRef = useRef<HTMLDivElement>(null);
 
-  // Fade in from 0 → 1, hold, then fade out 1 → 0
+  const { scrollYProgress } = useScroll({
+    target: rowRef,
+    offset: ["start end", "end start"],
+  });
+
+  // Opacity peaks when the element is in the center of the viewport
+  // and fades as it moves away (above or below)
   const opacity = useTransform(scrollYProgress, (v) => {
-    // Before this scene
-    if (v < start - segmentSize * 0.1) return 0;
-    // After this scene
-    if (v > end + segmentSize * 0.1) return 0;
-
-    // Fade in zone: start → start + 20% of segment
-    if (v < start + segmentSize * 0.2) {
-      return Math.max(0, Math.min(1, (v - start) / (segmentSize * 0.2)));
-    }
-
-    // Fade out zone: end - 20% of segment → end
-    if (v > end - segmentSize * 0.2) {
-      return Math.max(0, Math.min(1, (end - v) / (segmentSize * 0.2)));
-    }
-
-    // Fully visible in the middle
-    return 1;
+    // v = 0 means top of element is at bottom of viewport
+    // v = 0.5 means element is centered
+    // v = 1 means bottom of element is at top of viewport
+    const distFromCenter = Math.abs(v - 0.45);
+    // Sharp falloff: fully visible within a tight band, fading outside
+    return Math.max(0.15, 1 - distFromCenter * 2.8);
   });
 
-  // Subtle vertical movement: enters from below, exits upward
-  const y = useTransform(scrollYProgress, (v) => {
-    const progress = (v - center) / segmentSize;
-    return progress * -40;
-  });
-
-  // Slight scale for depth feel
+  // Subtle scale for depth
   const scale = useTransform(scrollYProgress, (v) => {
-    const dist = Math.abs(v - center) / segmentSize;
-    return Math.max(0.96, 1 - dist * 0.04);
+    const distFromCenter = Math.abs(v - 0.45);
+    return Math.max(0.97, 1 - distFromCenter * 0.06);
+  });
+
+  // Subtle blur for non-focused items
+  const blur = useTransform(scrollYProgress, (v) => {
+    const distFromCenter = Math.abs(v - 0.45);
+    const blurAmount = Math.max(0, (distFromCenter - 0.15) * 6);
+    return `blur(${blurAmount}px)`;
   });
 
   return (
     <motion.div
-      className="absolute inset-0 flex items-center justify-center pointer-events-none"
-      style={{ opacity }}
+      ref={rowRef}
+      className="py-12 md:py-16 border-b border-border/30 last:border-b-0"
+      style={{ opacity, scale, filter: blur }}
     >
-      <motion.div
-        className="max-w-3xl mx-auto px-6 md:px-10 w-full pointer-events-auto"
-        style={{ y, scale }}
-      >
-        {/* Service number + title */}
-        <div className="mb-8">
-          <span className="inline-block text-xs font-semibold tracking-[0.2em] uppercase text-accent mb-4">
-            {service.number} / {String(total).padStart(2, "0")}
-          </span>
-          <h3 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-text-primary leading-[1.1]">
+      <div className="grid grid-cols-[auto_1fr] gap-6 md:gap-10 items-start">
+        {/* Big number */}
+        <span className="font-heading text-5xl md:text-7xl lg:text-8xl font-bold text-text-primary/20 leading-none select-none">
+          {service.number}
+        </span>
+
+        {/* Content */}
+        <div className="pt-1 md:pt-3">
+          <h3 className="font-heading text-xl md:text-2xl lg:text-3xl font-bold text-text-primary mb-3 leading-tight">
             {service.title}
           </h3>
+
+          <p className="text-text-muted text-sm md:text-base leading-relaxed max-w-xl mb-5">
+            {service.description}
+          </p>
+
+          <ul className="flex flex-wrap gap-x-6 gap-y-1.5 mb-5">
+            {service.features.map((feature) => (
+              <li key={feature} className="flex items-center gap-2 text-xs md:text-sm text-text-dim">
+                <span className="w-1 h-1 rounded-full bg-accent shrink-0" />
+                {feature}
+              </li>
+            ))}
+          </ul>
+
+          <Button href={`/services#${service.id}`} variant="secondary">
+            Explore Service
+          </Button>
         </div>
-
-        {/* Description */}
-        <p className="text-text-muted text-base md:text-lg leading-relaxed mb-8 max-w-xl">
-          {service.description}
-        </p>
-
-        {/* Features */}
-        <ul className="space-y-2.5 mb-8">
-          {service.features.map((feature) => (
-            <li key={feature} className="flex items-start gap-3 text-sm text-text-muted">
-              <span className="w-1.5 h-1.5 rounded-full bg-accent mt-1.5 shrink-0" />
-              {feature}
-            </li>
-          ))}
-        </ul>
-
-        {/* CTA */}
-        <Button href={`/services#${service.id}`}>
-          Explore Service
-        </Button>
-      </motion.div>
+      </div>
     </motion.div>
   );
 }
 
-// ── Progress Indicator (right side dots) ─────────────────
-
-function ProgressIndicator({
-  scrollYProgress,
-  total,
-}: {
-  scrollYProgress: ReturnType<typeof useScroll>["scrollYProgress"];
-  total: number;
-}) {
-  return (
-    <div className="absolute right-6 md:right-10 top-1/2 -translate-y-1/2 flex flex-col items-center gap-3 z-10">
-      {Array.from({ length: total }).map((_, index) => (
-        <ProgressDot
-          key={index}
-          index={index}
-          scrollYProgress={scrollYProgress}
-          total={total}
-        />
-      ))}
-    </div>
-  );
-}
-
-function ProgressDot({
-  index,
-  scrollYProgress,
-  total,
-}: {
-  index: number;
-  scrollYProgress: ReturnType<typeof useScroll>["scrollYProgress"];
-  total: number;
-}) {
-  const segmentSize = 1 / total;
-  const start = index * segmentSize;
-  const end = start + segmentSize;
-
-  const isActive = useTransform(scrollYProgress, (v) => v >= start && v < end);
-  const dotScale = useTransform(isActive, (active) => (active ? 1 : 0.5));
-  const dotOpacity = useTransform(isActive, (active) => (active ? 1 : 0.3));
-  const dotBg = useTransform(isActive, (active) =>
-    active ? "#D65316" : "#252A35"
-  );
-
-  return (
-    <motion.div
-      className="w-2 h-2 rounded-full transition-colors"
-      style={{
-        scale: dotScale,
-        opacity: dotOpacity,
-        backgroundColor: dotBg,
-      }}
-    />
-  );
-}
-
-// ── Desktop: Full-Screen Scroll-Driven ──────────────────
+// ── Desktop Services ────────────────────────────────────
 
 function DesktopServices() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start start", "end end"],
-  });
-
-  const total = services.length;
-
   return (
-    <div ref={sectionRef} className="relative" style={{ height: `${total * 100}vh` }}>
-      {/* Sticky viewport container */}
-      <div className="sticky top-0 h-screen overflow-hidden">
-        {/* Section label — always visible, top-left */}
-        <div className="absolute top-24 left-6 md:left-10 z-10">
-          <span className="text-xs font-semibold tracking-[0.2em] uppercase text-text-dim">
-            What We Do
-          </span>
-        </div>
-
-        {/* Progress dots — right side */}
-        <ProgressIndicator scrollYProgress={scrollYProgress} total={total} />
-
-        {/* Service scenes — stacked, only one visible at a time */}
-        {services.map((service, index) => (
-          <ServiceScene
-            key={service.id}
-            service={service}
-            index={index}
-            scrollYProgress={scrollYProgress}
-            total={total}
-          />
-        ))}
-
-        {/* Bottom progress bar */}
-        <div className="absolute bottom-8 left-6 md:left-10 right-6 md:right-10 z-10">
-          <div className="h-[1px] bg-border rounded-full overflow-hidden">
-            <motion.div
-              className="h-full bg-accent origin-left rounded-full"
-              style={{ scaleX: scrollYProgress }}
-            />
+    <div className="py-24 md:py-32">
+      <div className="max-w-[1400px] mx-auto px-6 md:px-10">
+        {/* Section heading */}
+        <ScrollReveal>
+          <div className="mb-16 md:mb-20">
+            <span className="inline-block text-xs font-semibold tracking-[0.2em] uppercase text-accent mb-4">
+              What We Do
+            </span>
+            <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-text-primary leading-[1.1]">
+              Services
+            </h2>
           </div>
+        </ScrollReveal>
+
+        {/* Service rows — all visible, opacity driven by scroll position */}
+        <div>
+          {services.map((service, index) => (
+            <ServiceRow
+              key={service.id}
+              service={service}
+              index={index}
+            />
+          ))}
         </div>
       </div>
     </div>
   );
 }
 
-// ── Mobile: Stacked Layout ──────────────────────────────
+// ── Mobile Services ─────────────────────────────────────
 
 function MobileServices() {
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
       {services.map((service, index) => (
         <ScrollReveal key={service.id} delay={index * 0.08}>
-          <div className="border border-border rounded-xl p-6">
-            <div className="mb-4">
-              <span className="inline-block text-xs font-semibold tracking-[0.2em] uppercase text-accent mb-3">
-                {service.number} / {String(services.length).padStart(2, "0")}
+          <div className="border border-border/30 rounded-xl p-5">
+            <div className="flex items-start gap-4 mb-3">
+              <span className="font-heading text-3xl font-bold text-text-primary/20 leading-none">
+                {service.number}
               </span>
-              <h3 className="font-heading text-xl font-bold text-text-primary">
+              <h3 className="font-heading text-lg font-bold text-text-primary pt-1">
                 {service.title}
               </h3>
             </div>
@@ -226,19 +140,19 @@ function MobileServices() {
               {service.description}
             </p>
 
-            <ul className="space-y-2 mb-5">
+            <ul className="space-y-1.5 mb-4">
               {service.features.map((feature) => (
                 <li
                   key={feature}
-                  className="flex items-start gap-2.5 text-sm text-text-muted"
+                  className="flex items-start gap-2 text-xs text-text-dim"
                 >
-                  <span className="w-1.5 h-1.5 rounded-full bg-accent mt-1.5 shrink-0" />
+                  <span className="w-1 h-1 rounded-full bg-accent mt-1.5 shrink-0" />
                   {feature}
                 </li>
               ))}
             </ul>
 
-            <Button href={`/services#${service.id}`}>
+            <Button href={`/services#${service.id}`} variant="secondary">
               Explore Service
             </Button>
           </div>
@@ -255,7 +169,7 @@ export function ServicesScrollDriven() {
 
   return (
     <section id="services" className="relative">
-      {/* Desktop: full-screen scroll-driven scenes */}
+      {/* Desktop */}
       <div className="hidden lg:block">
         {prefersReducedMotion ? (
           <div className="py-24 md:py-32">
@@ -265,11 +179,8 @@ export function ServicesScrollDriven() {
                   What We Do
                 </span>
                 <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-text-primary leading-[1.1]">
-                  Services built around your needs.
+                  Services
                 </h2>
-                <p className="mt-4 text-text-muted text-base md:text-lg max-w-2xl leading-relaxed">
-                  We don&apos;t just write code. We solve business problems with well-designed software.
-                </p>
               </div>
               <MobileServices />
             </div>
@@ -279,7 +190,7 @@ export function ServicesScrollDriven() {
         )}
       </div>
 
-      {/* Mobile: stacked cards */}
+      {/* Mobile */}
       <div className="lg:hidden py-24">
         <div className="max-w-[1400px] mx-auto px-6 md:px-10">
           <ScrollReveal>
@@ -288,11 +199,8 @@ export function ServicesScrollDriven() {
                 What We Do
               </span>
               <h2 className="font-heading text-3xl md:text-4xl font-bold tracking-tight text-text-primary leading-[1.1]">
-                Services built around your needs.
+                Services
               </h2>
-              <p className="mt-4 text-text-muted text-base md:text-lg max-w-2xl leading-relaxed">
-                We don&apos;t just write code. We solve business problems with well-designed software.
-              </p>
             </div>
           </ScrollReveal>
           <MobileServices />
