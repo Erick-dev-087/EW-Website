@@ -1,17 +1,16 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import logoImage from "@/media/logo.png";
-import { usePathname } from "next/navigation";
 import { NAV_LINKS } from "@/lib/constants";
 import { MobileMenu } from "./MobileMenu";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const pathname = usePathname();
+  const [activeSection, setActiveSection] = useState<string>("");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,6 +18,33 @@ export function Navbar() {
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Track which section is in view
+  useEffect(() => {
+    const sectionIds = NAV_LINKS.map((link) => link.href.replace("#", ""));
+    const observers: IntersectionObserver[] = [];
+
+    sectionIds.forEach((id) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              setActiveSection(`#${id}`);
+            }
+          });
+        },
+        { rootMargin: "-40% 0px -55% 0px" }
+      );
+
+      observer.observe(el);
+      observers.push(observer);
+    });
+
+    return () => observers.forEach((o) => o.disconnect());
   }, []);
 
   // Lock body scroll when mobile menu is open
@@ -32,6 +58,18 @@ export function Navbar() {
       document.body.style.overflow = "";
     };
   }, [mobileOpen]);
+
+  const handleNavClick = useCallback(
+    (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+      e.preventDefault();
+      const id = href.replace("#", "");
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+      }
+    },
+    []
+  );
 
   return (
     <>
@@ -62,11 +100,12 @@ export function Navbar() {
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-10">
             {NAV_LINKS.map((link) => {
-              const isActive = pathname === link.href;
+              const isActive = activeSection === link.href;
               return (
-                <Link
+                <a
                   key={link.href}
                   href={link.href}
+                  onClick={(e) => handleNavClick(e, link.href)}
                   className={`relative text-sm tracking-wide font-medium transition-colors duration-250 ${
                     isActive
                       ? "text-accent"
@@ -80,7 +119,7 @@ export function Navbar() {
                       isActive ? "w-full" : "w-0"
                     }`}
                   />
-                </Link>
+                </a>
               );
             })}
           </div>
@@ -141,7 +180,7 @@ export function Navbar() {
       <MobileMenu
         isOpen={mobileOpen}
         onClose={() => setMobileOpen(false)}
-        pathname={pathname}
+        activeSection={activeSection}
       />
     </>
   );

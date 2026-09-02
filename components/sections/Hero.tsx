@@ -62,7 +62,7 @@ export function Hero() {
               <Button href={WHATSAPP_URL_WITH_MESSAGE} external>
                 Start a Project
               </Button>
-              <Button href="#selected-work" variant="secondary">
+              <Button href="/work" variant="secondary">
                 View Our Work
               </Button>
             </motion.div>

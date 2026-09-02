@@ -2,7 +2,7 @@ import { ScrollReveal } from "@/components/ui/ScrollReveal";
 
 export function About() {
   return (
-    <section id="about" className="relative py-24 md:py-32 bg-bg-secondary">
+    <section id="about" className="relative py-24 md:py-32">
       <div className="max-w-[1400px] mx-auto px-6 md:px-10">
         <div className="max-w-3xl">
           {/* Label */}

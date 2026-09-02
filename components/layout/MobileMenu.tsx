@@ -1,5 +1,6 @@
 "use client";
 
+import { useCallback } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "motion/react";
 import { NAV_LINKS } from "@/lib/constants";
@@ -7,10 +8,26 @@ import { NAV_LINKS } from "@/lib/constants";
 interface MobileMenuProps {
   isOpen: boolean;
   onClose: () => void;
-  pathname: string;
+  activeSection: string;
 }
 
-export function MobileMenu({ isOpen, onClose, pathname }: MobileMenuProps) {
+export function MobileMenu({ isOpen, onClose, activeSection }: MobileMenuProps) {
+  const handleNavClick = useCallback(
+    (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+      e.preventDefault();
+      onClose();
+      // Small delay so the menu closes before scrolling
+      setTimeout(() => {
+        const id = href.replace("#", "");
+        const el = document.getElementById(id);
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 350);
+    },
+    [onClose]
+  );
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -39,7 +56,7 @@ export function MobileMenu({ isOpen, onClose, pathname }: MobileMenuProps) {
             className="relative z-10 flex flex-col items-center justify-center h-full gap-8 px-6"
           >
             {NAV_LINKS.map((link, index) => {
-              const isActive = pathname === link.href;
+              const isActive = activeSection === link.href;
               return (
                 <motion.div
                   key={link.href}
@@ -51,9 +68,9 @@ export function MobileMenu({ isOpen, onClose, pathname }: MobileMenuProps) {
                     ease: [0.16, 1, 0.3, 1],
                   }}
                 >
-                  <Link
+                  <a
                     href={link.href}
-                    onClick={onClose}
+                    onClick={(e) => handleNavClick(e, link.href)}
                     className={`text-3xl font-heading font-semibold tracking-tight transition-colors duration-250 ${
                       isActive
                         ? "text-accent"
@@ -61,7 +78,7 @@ export function MobileMenu({ isOpen, onClose, pathname }: MobileMenuProps) {
                     }`}
                   >
                     {link.label}
-                  </Link>
+                  </a>
                 </motion.div>
               );
             })}
