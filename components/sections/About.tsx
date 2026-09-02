@@ -26,7 +26,7 @@ export function About() {
             <p className="text-text-muted text-base md:text-lg leading-relaxed mb-6">
               It&apos;s about understanding the problem, designing the right
               solution, and building something people actually want to use. We
-              believe great software starts with listening — understanding your
+              believe great software starts with listening, understanding your
               business, your users, and the real challenges you face.
             </p>
           </ScrollReveal>

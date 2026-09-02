@@ -114,7 +114,7 @@ export const projects: Project[] = [
     description:
       "An automation platform that streamlined document processing, client communication, and reporting for a professional services firm.",
     challenge:
-      "The firm spent 30+ hours per week on manual data entry, document formatting, and report generation — time better spent on client work.",
+      "The firm spent 30+ hours per week on manual data entry, document formatting, and report generation, time better spent on client work.",
     solution:
       "We designed intelligent workflows using OCR, NLP, and custom integrations that automatically process documents, generate reports, and sync data across systems.",
     process:
@@ -253,7 +253,7 @@ export const services: Service[] = [
     number: "05",
     title: "UI / UX Design",
     description:
-      "Design that makes complex things feel simple. We create interfaces that are intuitive, accessible, and visually refined — because good design is good business.",
+      "Design that makes complex things feel simple. We create interfaces that are intuitive, accessible, and visually refined, because good design is good business.",
     features: [
       "User research & personas",
       "Wireframing & prototyping",
@@ -302,7 +302,7 @@ export const processSteps: ProcessStep[] = [
     number: "04",
     title: "Launch",
     description:
-      "Deploy the product and continue improving it. We don't disappear after launch — we stay until it's right.",
+      "Deploy the product and continue improving it. We don't disappear after launch. We stay until it's right.",
   },
 ];
 
@@ -316,7 +316,7 @@ export interface Client {
 
 export const clients: Client[] = [
   {
-    name: "SPE International — Kenyatta University Chapter",
+    name: "SPE International, Kenyatta University Chapter",
     logo: "/clients/spe-ku.jpeg",
     width: 120,
     height: 120,

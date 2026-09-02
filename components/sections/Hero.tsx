@@ -15,7 +15,7 @@ export function Hero() {
     >
       <div className="max-w-[1400px] mx-auto px-6 md:px-10 w-full py-32 md:py-0">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
-          {/* Left — Content */}
+          {/* Left, Content */}
           <div className="relative z-10">
             {/* Small label */}
             <motion.span
@@ -48,7 +48,7 @@ export function Hero() {
               transition={{ duration: 0.5, delay: 0.5 }}
               className="text-text-muted text-base md:text-lg max-w-md leading-relaxed mb-8"
             >
-              We design and build modern software for ambitious businesses —
+              We design and build modern software for ambitious businesses.
               from concept to launch and beyond.
             </motion.p>
 
@@ -68,7 +68,7 @@ export function Hero() {
             </motion.div>
           </div>
 
-          {/* Right — Logo + Grid */}
+          {/* Right, Logo + Grid */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}

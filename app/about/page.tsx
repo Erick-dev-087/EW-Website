@@ -8,7 +8,7 @@ import logoImage from "@/media/logo.png";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "E&W Software Agency — our story, philosophy, approach, and values. We build software that solves real problems for real businesses.",
+    "E&W Software Agency, our story, philosophy, approach, and values. We build software that solves real problems for real businesses.",
 };
 
 export default function AboutPage() {
@@ -71,7 +71,7 @@ export default function AboutPage() {
               </p>
               <p className="text-text-muted text-base md:text-lg leading-relaxed">
                 We set out to change that. To build a software agency that treats
-                every project like its own product — with the same attention to
+                every project like its own product, with the same attention to
                 design, engineering quality, and long-term thinking that the best
                 tech companies apply internally.
               </p>

@@ -33,11 +33,11 @@ export function Process() {
           {/* Progress Line Container */}
           <div className="relative mb-16">
             {/* Background line */}
-            <div className="absolute top-4 left-0 right-0 h-[2px] bg-border" />
+            <div className="absolute top-8 left-0 right-0 h-[2px] bg-border" />
 
             {/* Orange progress line */}
             <motion.div
-              className="absolute top-4 left-0 h-[2px] bg-accent origin-left"
+              className="absolute top-8 left-0 h-[2px] bg-accent origin-left"
               style={{
                 scaleX: scrollYProgress,
                 width: "100%",

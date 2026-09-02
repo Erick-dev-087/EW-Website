@@ -27,7 +27,7 @@ export function Services() {
 
         {/* Desktop: Two-column layout */}
         <div className="hidden lg:grid lg:grid-cols-[1fr_1.5fr] gap-12 xl:gap-16">
-          {/* Left — Service List */}
+          {/* Left, Service List */}
           <ScrollReveal direction="left">
             <div className="space-y-1">
               {services.map((service, index) => (
@@ -78,7 +78,7 @@ export function Services() {
             </div>
           </ScrollReveal>
 
-          {/* Right — Service Detail */}
+          {/* Right, Service Detail */}
           <ScrollReveal direction="right">
             <div className="relative min-h-[340px]">
               <AnimatePresence mode="wait">
@@ -91,7 +91,7 @@ export function Services() {
                   className="bg-bg-surface border border-border rounded-xl p-8 xl:p-10"
                 >
                   <span className="text-xs font-semibold tracking-[0.15em] uppercase text-accent mb-3 block">
-                    {activeService.number} — {activeService.title}
+                    {activeService.number}. {activeService.title}
                   </span>
 
                   <p className="text-text-primary text-base md:text-lg leading-relaxed mb-6">

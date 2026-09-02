@@ -49,7 +49,7 @@ export default function ServicesPage() {
                 {/* Content */}
                 <div className={index % 2 === 1 ? "lg:order-2" : ""}>
                   <span className="text-xs font-semibold tracking-[0.15em] uppercase text-accent mb-3 block">
-                    {service.number} — {service.title}
+                    {service.number}. {service.title}
                   </span>
 
                   <h2 className="font-heading text-2xl md:text-3xl font-bold text-text-primary mb-4 leading-tight">
