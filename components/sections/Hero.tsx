@@ -24,7 +24,7 @@ export function Hero() {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="inline-block text-xs font-semibold tracking-[0.25em] uppercase text-accent mb-6"
             >
-              Software Agency
+              Software That Solves Problems
             </motion.span>
 
             {/* Main heading */}
@@ -34,11 +34,11 @@ export function Hero() {
               transition={{ duration: 0.6, delay: 0.35 }}
               className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-[3.5rem] xl:text-[4rem] font-bold tracking-tight leading-[1.05] text-text-primary mb-6"
             >
-              We build digital
+              Your business deserves
               <br />
-              products that move
+              software that works
               <br />
-              <span className="text-accent">business.</span>
+              <span className="text-accent">as hard as you do.</span>
             </motion.h1>
 
             {/* Supporting text */}
@@ -48,8 +48,8 @@ export function Hero() {
               transition={{ duration: 0.5, delay: 0.5 }}
               className="text-text-muted text-base md:text-lg max-w-md leading-relaxed mb-8"
             >
-              We design and build modern software for ambitious businesses.
-              from concept to launch and beyond.
+              From websites to automation, we help ambitious businesses
+              solve real problems with the right technology.
             </motion.p>
 
             {/* CTAs */}
@@ -60,7 +60,7 @@ export function Hero() {
               className="flex flex-wrap items-center gap-4"
             >
               <Button href={WHATSAPP_URL_WITH_MESSAGE} external>
-                Start a Project
+                Start a Conversation
               </Button>
               <Button href="/work" variant="secondary">
                 View Our Work

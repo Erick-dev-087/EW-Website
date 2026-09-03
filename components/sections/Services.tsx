@@ -19,9 +19,9 @@ export function Services() {
       <div className="max-w-[1400px] mx-auto px-6 md:px-10">
         <ScrollReveal>
           <SectionHeading
-            label="What We Do"
-            title="Services built around your needs."
-            description="We don't just write code. We solve business problems with well-designed software."
+            label="What You Get"
+            title="How we can help."
+            description="Every business has different challenges. Here's how we help you tackle yours."
           />
         </ScrollReveal>
 
@@ -94,8 +94,12 @@ export function Services() {
                     {activeService.number}. {activeService.title}
                   </span>
 
-                  <p className="text-text-primary text-base md:text-lg leading-relaxed mb-6">
-                    {activeService.description}
+                  <p className="text-text-primary text-base md:text-lg font-medium italic leading-relaxed mb-3">
+                    {activeService.hook}
+                  </p>
+
+                  <p className="text-text-muted text-sm md:text-base leading-relaxed mb-6">
+                    {activeService.solution}
                   </p>
 
                   <ul className="space-y-2.5 mb-8">
@@ -108,7 +112,7 @@ export function Services() {
                   </ul>
 
                   <Button href={`/services#${activeService.id}`}>
-                    Explore Service
+                    {activeService.cta}
                   </Button>
                 </motion.div>
               </AnimatePresence>
@@ -175,8 +179,12 @@ export function Services() {
                       className="overflow-hidden"
                     >
                       <div className="px-5 pb-5 pt-1">
+                        <p className="text-accent text-xs font-medium italic mb-2">
+                          {service.hook}
+                        </p>
+
                         <p className="text-sm text-text-muted leading-relaxed mb-4">
-                          {service.description}
+                          {service.solution}
                         </p>
 
                         <ul className="space-y-2 mb-5">
@@ -192,7 +200,7 @@ export function Services() {
                         </ul>
 
                         <Button href={`/services#${service.id}`}>
-                          Explore Service
+                          {service.cta}
                         </Button>
                       </div>
                     </motion.div>

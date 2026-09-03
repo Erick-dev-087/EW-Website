@@ -23,9 +23,9 @@ export const CONTACT_INFO = {
 
 export const SITE_CONFIG = {
   name: "E&W Software Agency",
-  tagline: "Software agency building digital products.",
+  tagline: "Software agency that solves business problems.",
   description:
-    "E&W is a premium software agency that designs and builds modern digital products for ambitious businesses. Web applications, mobile apps, custom software, and automation.",
+    "E&W is a software agency that helps ambitious businesses solve real problems with the right technology. Websites, automation, custom software, and mobile apps, all built around your needs.",
   url: "https://ewsoftware.agency",
 } as const;
 

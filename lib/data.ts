@@ -153,6 +153,12 @@ export interface Service {
   id: string;
   number: string;
   title: string;
+  hook: string;
+  problem: string;
+  outcome: string;
+  solution: string;
+  cta: string;
+  ctaQuestion: string;
   description: string;
   features: string[];
   forWho: string;
@@ -163,9 +169,18 @@ export const services: Service[] = [
   {
     id: "web-applications",
     number: "01",
-    title: "Web Applications",
+    title: "Websites & Digital Experiences",
+    hook: "Want more people to discover your business and take you seriously when they do?",
+    problem:
+      "Your business exists. But online, it barely does. Potential customers can't find you, and when they do, your digital presence doesn't reflect the quality of what you actually offer.",
+    outcome:
+      "Become easier to discover, trust, and choose, with a digital presence that works as a real business asset.",
+    solution:
+      "We build websites and digital experiences designed around your customers and your business. Fast, polished, and built to grow with you.",
+    cta: "Improve My Digital Presence →",
+    ctaQuestion: "Ready to turn your online presence into a business asset?",
     description:
-      "We build fast, scalable web applications designed around your business. From complex dashboards to customer-facing platforms, every application is built for performance, security, and growth.",
+      "Your business deserves a digital presence that works as hard as you do. From custom platforms to customer-facing portals, every experience is designed to help people find you, trust you, and choose you.",
     features: [
       "Custom web platforms & portals",
       "Real-time dashboards & analytics",
@@ -173,7 +188,8 @@ export const services: Service[] = [
       "Progressive web applications",
       "API development & integration",
     ],
-    forWho: "Businesses that need custom web solutions beyond what templates and page builders can offer.",
+    forWho:
+      "You've outgrown templates and page builders, and need a digital presence that truly represents your business.",
     workflow: [
       "Requirements workshop",
       "Architecture design",
@@ -183,55 +199,20 @@ export const services: Service[] = [
     ],
   },
   {
-    id: "mobile-applications",
-    number: "02",
-    title: "Mobile Applications",
-    description:
-      "Native and cross-platform mobile experiences that users actually want to open. We build apps that work beautifully on both iOS and Android, with offline support and smooth performance.",
-    features: [
-      "Cross-platform (React Native)",
-      "Native iOS & Android",
-      "Offline-first architecture",
-      "Push notifications & real-time updates",
-      "App Store optimization & deployment",
-    ],
-    forWho: "Companies looking to reach users on mobile with a polished, performant application.",
-    workflow: [
-      "User research & wireframing",
-      "UI/UX design",
-      "Development & device testing",
-      "Beta testing program",
-      "Store submission & launch",
-    ],
-  },
-  {
-    id: "custom-software",
-    number: "03",
-    title: "Custom Software",
-    description:
-      "When off-the-shelf tools don't fit, we build custom software tailored to your exact operational needs. Internal tools, workflow systems, and specialized platforms designed to solve your specific problems.",
-    features: [
-      "Internal business tools",
-      "Workflow automation systems",
-      "Data management platforms",
-      "Legacy system modernization",
-      "System integration & middleware",
-    ],
-    forWho: "Organizations with unique processes that need software built around how they actually work.",
-    workflow: [
-      "Process audit & mapping",
-      "Solution architecture",
-      "Modular development",
-      "User acceptance testing",
-      "Training & handoff",
-    ],
-  },
-  {
     id: "automation-ai",
-    number: "04",
-    title: "Automation & AI",
+    number: "02",
+    title: "AI & Automation",
+    hook: "Still paying people to do work a system could handle?",
+    problem:
+      "Your team spends hours on repetitive tasks like data entry, report generation, and manual follow-ups. That's time that should go toward work that actually moves the business forward.",
+    outcome:
+      "Free your team to focus on high-value work while intelligent systems handle the rest, accurately and around the clock.",
+    solution:
+      "We automate repetitive workflows and integrate AI capabilities so your team can spend more time on work that actually moves the business forward.",
+    cta: "Find Automation Opportunities →",
+    ctaQuestion: "Wondering what your business could automate?",
     description:
-      "Eliminate manual work and unlock insights with intelligent automation. We integrate AI capabilities and build custom automation workflows that save time and reduce errors.",
+      "Stop losing hours to tasks a system could handle. We build intelligent automation workflows and integrate AI capabilities that save your team time, reduce errors, and let you scale without scaling headcount.",
     features: [
       "Business process automation",
       "AI/ML integration",
@@ -239,7 +220,8 @@ export const services: Service[] = [
       "Chatbots & conversational AI",
       "Data pipeline automation",
     ],
-    forWho: "Teams spending too much time on repetitive tasks that machines could handle better.",
+    forWho:
+      "Your team is spending too much time on repetitive tasks that machines could handle better, and it's slowing everything else down.",
     workflow: [
       "Process discovery",
       "Automation design",
@@ -249,11 +231,84 @@ export const services: Service[] = [
     ],
   },
   {
+    id: "custom-software",
+    number: "03",
+    title: "Custom Software",
+    hook: "Outgrowing the way your business currently works?",
+    problem:
+      "You're forcing your business into someone else's software. Workarounds, spreadsheets, and disconnected tools that weren't built for how you actually operate.",
+    outcome:
+      "A system that fits your business instead of the other way around. Built around your actual processes, not someone else's assumptions.",
+    solution:
+      "We build systems around your actual processes instead of forcing your business into someone else's software. Internal tools, workflow systems, and platforms designed for exactly how you work.",
+    cta: "Build a Better System →",
+    ctaQuestion: "Ready to stop working around your software?",
+    description:
+      "When off-the-shelf tools don't fit, you shouldn't have to change how your business works. We build custom software tailored to your exact operational needs, including internal tools, workflow systems, and platforms designed for how you actually operate.",
+    features: [
+      "Internal business tools",
+      "Workflow automation systems",
+      "Data management platforms",
+      "Legacy system modernization",
+      "System integration & middleware",
+    ],
+    forWho:
+      "Your business has unique processes, and you need software built around how you actually work, not the other way around.",
+    workflow: [
+      "Process audit & mapping",
+      "Solution architecture",
+      "Modular development",
+      "User acceptance testing",
+      "Training & handoff",
+    ],
+  },
+  {
+    id: "mobile-applications",
+    number: "04",
+    title: "Mobile Applications",
+    hook: "What if your customers could take your business with them?",
+    problem:
+      "Your customers expect convenience. But your services are only accessible through a browser or in person, limiting when and how they can engage with your business.",
+    outcome:
+      "Your services become more accessible, convenient, and connected, available right in your customers' pockets.",
+    solution:
+      "We create mobile experiences that make your services more accessible, convenient, and connected. On both iOS and Android, with offline support and smooth performance.",
+    cta: "Explore a Mobile Experience →",
+    ctaQuestion: "Ready to put your business in your customers' hands?",
+    description:
+      "Your customers want to engage with your business on their terms. We build mobile experiences that make your services more accessible, convenient, and connected. Polished apps that work beautifully on both platforms.",
+    features: [
+      "Cross-platform (React Native)",
+      "Native iOS & Android",
+      "Offline-first architecture",
+      "Push notifications & real-time updates",
+      "App Store optimization & deployment",
+    ],
+    forWho:
+      "You want to reach your customers on mobile with an experience that's as polished and reliable as your business itself.",
+    workflow: [
+      "User research & wireframing",
+      "UI/UX design",
+      "Development & device testing",
+      "Beta testing program",
+      "Store submission & launch",
+    ],
+  },
+  {
     id: "ui-ux-design",
     number: "05",
     title: "UI / UX Design",
+    hook: "Is your product powerful but painful to use?",
+    problem:
+      "Your product works, but users struggle with it. Confusing flows, cluttered screens, and poor first impressions are costing you customers and support hours.",
+    outcome:
+      "A product that feels intuitive from the first click. Your users stay longer, need less help, and actually enjoy using it.",
+    solution:
+      "We design interfaces that make complex things feel simple. Intuitive, accessible, and visually refined, because good design is good business.",
+    cta: "Start a Design Audit →",
+    ctaQuestion: "Want a product your users actually enjoy using?",
     description:
-      "Design that makes complex things feel simple. We create interfaces that are intuitive, accessible, and visually refined, because good design is good business.",
+      "Your product should feel effortless to use. We create interfaces that are intuitive, accessible, and visually refined, turning complexity into clarity so your users stay, engage, and come back.",
     features: [
       "User research & personas",
       "Wireframing & prototyping",
@@ -261,7 +316,8 @@ export const services: Service[] = [
       "Interaction design",
       "Usability testing",
     ],
-    forWho: "Products that need to look professional and feel effortless to use.",
+    forWho:
+      "Your product needs to look professional and feel effortless, because first impressions and usability directly impact your bottom line.",
     workflow: [
       "Discovery & research",
       "Information architecture",
@@ -274,8 +330,17 @@ export const services: Service[] = [
     id: "seo",
     number: "06",
     title: "Search Engine Optimization",
+    hook: "Are your competitors showing up where your customers are looking?",
+    problem:
+      "Your potential customers are searching for exactly what you offer, but they're finding your competitors instead. You're invisible where it matters most.",
+    outcome:
+      "Show up when your customers are looking, and stand out when they find you.",
+    solution:
+      "We optimize your digital presence to rank higher, drive organic traffic, and convert visitors into customers, so you stop relying solely on paid ads and word of mouth.",
+    cta: "Get Found Online →",
+    ctaQuestion: "Ready to show up where your customers are looking?",
     description:
-      "Be found by the right people at the right time. We optimize your digital presence to rank higher, drive organic traffic, and convert visitors into customers.",
+      "Your potential customers are already searching for what you offer. We make sure they find you by optimizing your digital presence to rank higher, drive organic traffic, and turn visitors into customers.",
     features: [
       "Technical SEO & site speed",
       "Keyword strategy & content planning",
@@ -283,7 +348,8 @@ export const services: Service[] = [
       "Local SEO & Google Business",
       "Analytics & performance tracking",
     ],
-    forWho: "Businesses looking to increase their online visibility and reduce reliance on paid advertising.",
+    forWho:
+      "You want to increase your online visibility and stop relying solely on paid advertising or word of mouth to find customers.",
     workflow: [
       "Comprehensive site audit",
       "Keyword & competitor research",

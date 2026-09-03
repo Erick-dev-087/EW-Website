@@ -22,7 +22,7 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: `${SITE_CONFIG.name}, Building Digital Products That Move Business`,
+    default: `${SITE_CONFIG.name} | Software That Solves Business Problems`,
     template: `%s | ${SITE_CONFIG.name}`,
   },
   description: SITE_CONFIG.description,

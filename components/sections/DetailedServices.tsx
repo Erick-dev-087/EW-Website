@@ -70,9 +70,32 @@ function DetailedServiceRow({
             {service.title}
           </h2>
 
-          <p className="text-text-muted text-base md:text-lg leading-relaxed max-w-3xl mb-10">
-            {service.description}
+          {/* Hook question */}
+          <p className="text-accent text-lg md:text-xl font-medium italic mb-8 max-w-2xl">
+            {service.hook}
           </p>
+
+          {/* Problem → Outcome → Solution */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 max-w-3xl">
+            <div>
+              <h3 className="text-xs font-semibold tracking-wide uppercase text-text-dim mb-2">The Problem</h3>
+              <p className="text-sm text-text-muted leading-relaxed">
+                {service.problem}
+              </p>
+            </div>
+            <div>
+              <h3 className="text-xs font-semibold tracking-wide uppercase text-text-dim mb-2">The Outcome</h3>
+              <p className="text-sm text-text-muted leading-relaxed">
+                {service.outcome}
+              </p>
+            </div>
+            <div>
+              <h3 className="text-xs font-semibold tracking-wide uppercase text-text-dim mb-2">How We Help</h3>
+              <p className="text-sm text-text-muted leading-relaxed">
+                {service.solution}
+              </p>
+            </div>
+          </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mb-10">
             {/* What We Provide */}
@@ -125,7 +148,7 @@ function DetailedServiceRow({
           </div>
 
           <Button href={WHATSAPP_URL_WITH_MESSAGE} external>
-            Discuss This Service
+            {service.cta}
           </Button>
         </div>
       </div>
@@ -150,9 +173,24 @@ function MobileServices() {
               </h3>
             </div>
 
-            <p className="text-base text-text-muted leading-relaxed mb-8">
-              {service.description}
+            <p className="text-accent text-base font-medium italic mb-4">
+              {service.hook}
             </p>
+
+            <div className="space-y-4 mb-8">
+              <div>
+                <h4 className="text-xs font-semibold tracking-wide uppercase text-text-dim mb-1">The Problem</h4>
+                <p className="text-sm text-text-muted leading-relaxed">{service.problem}</p>
+              </div>
+              <div>
+                <h4 className="text-xs font-semibold tracking-wide uppercase text-text-dim mb-1">The Outcome</h4>
+                <p className="text-sm text-text-muted leading-relaxed">{service.outcome}</p>
+              </div>
+              <div>
+                <h4 className="text-xs font-semibold tracking-wide uppercase text-text-dim mb-1">How We Help</h4>
+                <p className="text-sm text-text-muted leading-relaxed">{service.solution}</p>
+              </div>
+            </div>
 
             <div className="space-y-6 mb-8">
               <div className="bg-bg-surface border border-border/50 rounded-xl p-5">
@@ -202,7 +240,7 @@ function MobileServices() {
             </div>
 
             <Button href={WHATSAPP_URL_WITH_MESSAGE} external>
-              Discuss This Service
+              {service.cta}
             </Button>
           </div>
         </ScrollReveal>

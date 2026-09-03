@@ -64,8 +64,12 @@ function ServiceRow({
             {service.title}
           </h3>
 
+          <p className="text-accent text-sm md:text-base font-medium italic mb-3">
+            {service.hook}
+          </p>
+
           <p className="text-text-muted text-sm md:text-base leading-relaxed max-w-xl mb-5">
-            {service.description}
+            {service.solution}
           </p>
 
           <ul className="flex flex-wrap gap-x-6 gap-y-1.5 mb-5">
@@ -78,7 +82,7 @@ function ServiceRow({
           </ul>
 
           <Button href={`/services#${service.id}`} variant="secondary">
-            Explore Service
+            {service.cta}
           </Button>
         </div>
       </div>
@@ -96,10 +100,10 @@ function DesktopServices() {
         <ScrollReveal>
           <div className="mb-16 md:mb-20">
             <span className="inline-block text-xs font-semibold tracking-[0.2em] uppercase text-accent mb-4">
-              What We Do
+              What You Get
             </span>
             <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-text-primary leading-[1.1]">
-              Services
+              How we can help.
             </h2>
           </div>
         </ScrollReveal>
@@ -136,8 +140,12 @@ function MobileServices() {
               </h3>
             </div>
 
+            <p className="text-accent text-xs font-medium italic mb-2">
+              {service.hook}
+            </p>
+
             <p className="text-sm text-text-muted leading-relaxed mb-4">
-              {service.description}
+              {service.solution}
             </p>
 
             <ul className="space-y-1.5 mb-4">
@@ -153,7 +161,7 @@ function MobileServices() {
             </ul>
 
             <Button href={`/services#${service.id}`} variant="secondary">
-              Explore Service
+              {service.cta}
             </Button>
           </div>
         </ScrollReveal>
@@ -176,10 +184,10 @@ export function ServicesScrollDriven() {
             <div className="max-w-[1400px] mx-auto px-6 md:px-10">
               <div className="mb-12">
                 <span className="inline-block text-xs font-semibold tracking-[0.2em] uppercase text-accent mb-4">
-                  What We Do
+                  What You Get
                 </span>
                 <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-text-primary leading-[1.1]">
-                  Services
+                  How we can help.
                 </h2>
               </div>
               <MobileServices />
@@ -196,10 +204,10 @@ export function ServicesScrollDriven() {
           <ScrollReveal>
             <div className="mb-12">
               <span className="inline-block text-xs font-semibold tracking-[0.2em] uppercase text-accent mb-4">
-                What We Do
+                What You Get
               </span>
               <h2 className="font-heading text-3xl md:text-4xl font-bold tracking-tight text-text-primary leading-[1.1]">
-                Services
+                How we can help.
               </h2>
             </div>
           </ScrollReveal>

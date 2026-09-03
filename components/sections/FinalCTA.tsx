@@ -15,19 +15,24 @@ export function FinalCTA() {
 
           <ScrollReveal direction="none">
             <span className="inline-block text-xs font-semibold tracking-[0.2em] uppercase text-accent mb-6">
-              Let&apos;s build something great.
+              Ready to move forward?
             </span>
           </ScrollReveal>
 
           <ScrollReveal delay={0.1}>
             <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tight text-text-primary leading-[1.1] mb-4">
-              Have a project in mind?
+              Tell us where you want your
+              <br />
+              business to go.
             </h2>
           </ScrollReveal>
 
           <ScrollReveal delay={0.15}>
-            <p className="font-heading text-xl md:text-2xl text-text-muted mb-10">
-              Let&apos;s talk.
+            <p className="font-heading text-lg md:text-xl text-text-muted mb-3">
+              You don&apos;t need to know exactly what you need.
+            </p>
+            <p className="text-text-dim text-base mb-10">
+              We&apos;ll help you figure out what to build.
             </p>
           </ScrollReveal>
 
@@ -37,7 +42,7 @@ export function FinalCTA() {
               external
               className="!px-8 !py-3.5 !text-base"
             >
-              Start a Project
+              Start a Conversation
             </Button>
           </ScrollReveal>
         </div>
